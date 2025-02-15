@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "f69571e5-f7cf-436a-9c22-0dd7d7888178",
+		"name": "Ticket Reservation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "16597527"
+	},
+	"item": [
+		{
+			"name": "Purchase Ticket",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"from\": \"London\",\r\n    \"to\": \"France\",\r\n    \"firstName\": \"Magesh\",\r\n    \"lastName\": \"Srinivasulu\",\r\n    \"phoneNumber\": 9500181828,\r\n    \"price\": \"$20\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/ticketReservation/purchaseTicket"
+			},
+			"response": []
+		},
+		{
+			"name": "User Receipts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Magesh\",\r\n    \"lastName\": \"Srinivasulu\",\r\n    \"phoneNumber\": 9500181828\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/ticketReservation/userReceipt"
+			},
+			"response": []
+		},
+		{
+			"name": "Remove User From Train",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/ticketReservation/removeUserFromTrain?from=London&to=France&price=$20&firstName=Magesh&lastName=Srinivasulu&phoneNumber=9500181828",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ticketReservation",
+						"removeUserFromTrain"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "London"
+						},
+						{
+							"key": "to",
+							"value": "France"
+						},
+						{
+							"key": "price",
+							"value": "$20"
+						},
+						{
+							"key": "firstName",
+							"value": "Magesh"
+						},
+						{
+							"key": "lastName",
+							"value": "Srinivasulu"
+						},
+						{
+							"key": "phoneNumber",
+							"value": "9500181828"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set Allocation By Section",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"from\": \"London\",\r\n    \"to\": \"France\",\r\n    \"price\": \"$20\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/ticketReservation/seatAllocationBySection?section=SectionA",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ticketReservation",
+						"seatAllocationBySection"
+					],
+					"query": [
+						{
+							"key": "section",
+							"value": "SectionA"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modify User Seat",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/ticketReservation/modifyUserSeat?from=London&to=France&cost=$20&firstName=Magesh&lastName=Srinivasulu&phoneNumber=9500181828&seat=SectionA-S1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ticketReservation",
+						"modifyUserSeat"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "London"
+						},
+						{
+							"key": "to",
+							"value": "France"
+						},
+						{
+							"key": "cost",
+							"value": "$20"
+						},
+						{
+							"key": "firstName",
+							"value": "Magesh"
+						},
+						{
+							"key": "lastName",
+							"value": "Srinivasulu"
+						},
+						{
+							"key": "phoneNumber",
+							"value": "9500181828"
+						},
+						{
+							"key": "seat",
+							"value": "SectionA-S1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
