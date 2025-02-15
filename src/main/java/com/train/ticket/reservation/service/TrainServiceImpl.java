@@ -87,19 +87,26 @@ public class TrainServiceImpl implements TrainService {
 
 		boolean removed = false;
 
+		List<Seat> seactionASeats = new ArrayList<Seat>();
+		List<Seat> seactionBSeats = new ArrayList<Seat>();
+
 		for (Seat s : t.getTrainSection().getSectionA().getUnAvailableSeats()) {
 			if (s.getUser().equals(user)) {
-				deAllocateSet(t.getTrainSection().getSectionA(), s);
+				seactionASeats.add(s);
 				removed = true;
 			}
 		}
 
+		deAllocateSet(t.getTrainSection().getSectionA(), seactionASeats);
+
 		for (Seat s : t.getTrainSection().getSectionB().getUnAvailableSeats()) {
 			if (s.getUser().equals(user)) {
-				deAllocateSet(t.getTrainSection().getSectionB(), s);
+				seactionBSeats.add(s);
 				removed = true;
 			}
 		}
+
+		deAllocateSet(t.getTrainSection().getSectionB(), seactionBSeats);
 
 		return removed;
 
@@ -115,7 +122,10 @@ public class TrainServiceImpl implements TrainService {
 		boolean modified = false;
 		for (Seat s : t.getTrainSection().getSectionA().getUnAvailableSeats()) {
 			if (s.getSeat().equals(seat) && s.getUser().equals(user)) {
-				deAllocateSet(t.getTrainSection().getSectionA(), s);
+				List<Seat> seats = new ArrayList<>();
+				seats.add(s);
+
+				deAllocateSet(t.getTrainSection().getSectionA(), seats);
 				modified = true;
 				break;
 			}
@@ -123,7 +133,10 @@ public class TrainServiceImpl implements TrainService {
 
 		for (Seat s : t.getTrainSection().getSectionB().getUnAvailableSeats()) {
 			if (s.getSeat().equals(seat) && s.getUser().equals(user)) {
-				deAllocateSet(t.getTrainSection().getSectionB(), s);
+				List<Seat> seats = new ArrayList<>();
+				seats.add(s);
+
+				deAllocateSet(t.getTrainSection().getSectionB(), seats);
 				modified = true;
 				break;
 			}
@@ -138,10 +151,13 @@ public class TrainServiceImpl implements TrainService {
 		return modifiedSeat;
 	}
 
-	private void deAllocateSet(Section section, Seat seat) {
-		seat.setUser(null);
-		section.getUnAvailableSeats().remove(seat);
-		section.getAvailableSeats().add(seat);
+	private void deAllocateSet(Section section, List<Seat> seats) {
+
+		for (Seat s : seats) {
+			s.setUser(null);
+			section.getUnAvailableSeats().remove(s);
+			section.getAvailableSeats().add(s);
+		}
 	}
 
 }

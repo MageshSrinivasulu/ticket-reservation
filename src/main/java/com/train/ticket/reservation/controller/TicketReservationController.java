@@ -2,6 +2,8 @@ package com.train.ticket.reservation.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +23,13 @@ import com.train.ticket.reservation.domain.train.Seat;
 import com.train.ticket.reservation.domain.train.Train;
 import com.train.ticket.reservation.domain.user.User;
 import com.train.ticket.reservation.service.BookingService;
+import com.train.ticket.reservation.service.BookingServiceImpl;
 
 @RestController
 @RequestMapping("/ticketReservation")
 public class TicketReservationController {
+
+	Logger logger = LoggerFactory.getLogger(TicketReservationController.class);
 
 	@Autowired
 	BookingService bookingService;
